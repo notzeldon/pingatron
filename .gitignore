@@ -1,0 +1,5 @@
+.idea
+*.local_*
+*.sqlite3
+*.sqlite
+/venv/
