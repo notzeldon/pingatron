@@ -73,7 +73,7 @@ class ServerPath(models.Model):
         _('relative path'),
         max_length=1023,
         db_index=True,
-        default='/',
+        default='',
         blank=True,
     )
 
@@ -99,6 +99,12 @@ class ServerPath(models.Model):
         blank=True,
         null=True,
         editable=False,
+    )
+
+    pingable = models.BooleanField(
+        _('pingable'),
+        default=False,
+        db_index=True,
     )
 
     @property

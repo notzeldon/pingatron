@@ -1,7 +1,7 @@
 from django.core.management import BaseCommand
 from scrapy.crawler import CrawlerProcess
 
-from ping.parser.spider import PingSpider
+from ping.parser.spiders.ping_spider import PingSpider
 
 
 class Command(BaseCommand):
