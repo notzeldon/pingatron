@@ -11,7 +11,7 @@ class ServerPathPipeline(object):
     STORAGE = {}
     def store(self, url, server_id):
         self.STORAGE[url] = server_id
-        if len(self.STORAGE) >= 1000:
+        if len(self.STORAGE) >= 100:
             self.save()
 
     def save(self):
@@ -20,7 +20,7 @@ class ServerPathPipeline(object):
             server_id__in=set(self.STORAGE.values())
         )
 
-        exists_data = set(qs.values_list('url', flat=True))
+        exists_data = set(qs.values_list('path', flat=True))
         need_create = set(self.STORAGE) - set(exists_data)
 
         new_objects = []
