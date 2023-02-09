@@ -11,7 +11,7 @@ from ping.models import Server
 
 class ParseSiteSpider(scrapy.Spider):
     name = 'ParseSiteSpider'
-    download_delay = 1
+    download_delay = 0.25
 
     def __init__(self,  site_or_server: Union[str, Server] = None, *args, **kwargs):
         if isinstance(site_or_server, str):
@@ -43,6 +43,11 @@ class ParseSiteSpider(scrapy.Spider):
                 lambda x: x.attrib['href'].startswith('/') or x.attrib['href'].startswith('http'), links
         ):
             href = true_link.attrib['href']
+            if '/media/' in href:
+                continue
+            href = href.strip()
+            if href.startswith('//'):
+                href = f'http:{href}'
             parsed_url = urllib.parse.urlsplit(href)
 
             if not parsed_url.netloc:
