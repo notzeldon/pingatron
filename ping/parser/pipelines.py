@@ -16,7 +16,7 @@ class ServerPathPipeline(object):
 
     def save(self):
         qs = ServerPath.objects.filter(
-            url__in=self.STORAGE.keys(),
+            path__in=self.STORAGE.keys(),
             server_id__in=set(self.STORAGE.values())
         )
 
@@ -26,7 +26,7 @@ class ServerPathPipeline(object):
         new_objects = []
         for x in need_create:
             obj = ServerPath(
-                url=x, server_id=self.STORAGE.get(x),
+                path=x, server_id=self.STORAGE.get(x),
             )
             new_objects.append(obj)
 
